@@ -26,22 +26,22 @@ public class ProductosController {
 		this.productosService = productosService;
 	}
 	
-	@GetMapping("Productos/obtenerProductos")			//Metodo para obtener todos los usuarios de MySQL
+	@GetMapping("/Productos/obtenerProductos")			//Metodo para obtener todos los usuarios de MySQL
 	public ArrayList<ProductosModel> obtenerProductos(){
 		return (ArrayList<ProductosModel>) productosService.obtenerTodos();
 	}
 	
-	@PostMapping(path = "Productos/obtenerProductoPorId")		//Se obtiene 
+	@PostMapping(path = "/Productos/obtenerProductoPorId")		//Se obtiene 
 	public ProductosModel obtenerProductoPorId(@RequestBody Map<String,Integer> Json) {
 		return productosService.obtenerporId(Json.get("id"));
 	}
 	
-	@GetMapping(path = "Productos/obtenerProductoPorCategoria/{categoria}")		//Se obtiene 
+	@GetMapping(path = "/Productos/obtenerProductoPorCategoria/{categoria}")		//Se obtiene 
 	public List<ProductosModel> obtenerProductoPorCategoria(@PathVariable("categoria") String categoria) {
 		return productosService.obtenerPorCategoria(categoria);
 	}
 	
-	@PostMapping(path = "Productos/nuevoProducto")		//Se obtiene 
+	@PostMapping(path = "/Productos/nuevoProducto")		//Se obtiene 
 	public ProductosModel nuevoProducto(@RequestBody ProductosModel productosModel) {
 		return productosService.nuevoProducto(productosModel);
 	}

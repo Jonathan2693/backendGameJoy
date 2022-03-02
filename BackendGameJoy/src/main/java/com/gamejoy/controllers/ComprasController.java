@@ -25,17 +25,17 @@ public class ComprasController {
 		this.comprasService = comprasService;
 	}
 	
-	@GetMapping("Compras/obtenerCompras")
+	@GetMapping("/Compras/obtenerCompras")
 	public ArrayList<ComprasModel> obtenerCompras(){
 		return (ArrayList<ComprasModel>) comprasService.obtenerCompras();
 	}
 	
-	@PostMapping("Compras/crearCompra")
+	@PostMapping("/Compras/crearCompra")
 	public ComprasModel crearCompra(@RequestBody ComprasModel comprasModel) {
 		return comprasService.crearCompra(comprasModel);
 	}
 	
-	@GetMapping("Compras/buscarCompraPorUsuario/{id}")
+	@GetMapping("/Compras/buscarCompraPorUsuario/{id}")
 	public ArrayList<ComprasModel> obtenerComprasPorUsuario(@PathVariable("id") Integer id) {
 		return (ArrayList<ComprasModel>) comprasService.obtenerPorUsuario(id);
 	}
