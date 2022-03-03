@@ -7,8 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,5 +54,24 @@ public class UsuariosController {
 	public UsuariosModel crearGuardarUsuario(@RequestBody UsuariosModel usuarioModel) {	//Se va a recibir un JSON tipo UsuariosModel para guardarlo o correo, SI EL MODELO TIENE ID, SE MODIFICARA EL USUARIO, DE LO CONTRARIO, SE CREARA UNO NUEVO
 		//usuarioModel.setContrasenia(bCryptPasswordEncoder.encode(usuarioModel.getContrasenia()));
 		return usuariosService.crearGuardarUsuario(usuarioModel);
+	}
+	
+	@PostMapping(path = "/Usuarios/GuardarUsuario")		
+	public UsuariosModel GuardarUsuario(@RequestBody Map<String,String> FEUser) {
+		UsuariosModel usuarioProvisional = new UsuariosModel();
+		usuarioProvisional = usuariosService.obtenerUsuarioPorId(Integer.parseInt(FEUser.get("id")));
+		usuarioProvisional.setNombre(FEUser.get("nombre"));
+		usuarioProvisional.setApellido(FEUser.get("apellido"));
+		usuarioProvisional.setTelefono(FEUser.get("telefono"));
+		usuarioProvisional.setDireccion(FEUser.get("direccion"));
+		usuarioProvisional.setNumeroTarjeta(FEUser.get("numeroTarjeta"));
+		usuarioProvisional.setFechaExpiracion(FEUser.get("fechaExpiracion"));
+		usuarioProvisional.setCvv(FEUser.get("cvv"));
+		usuarioProvisional.setEsVendedor(Boolean.parseBoolean(FEUser.get("esVendedor")));
+		usuarioProvisional.setComercio(FEUser.get("comercio"));
+		usuarioProvisional.setCorreoEmpresa(FEUser.get("correoEmpresa"));
+		usuarioProvisional.setTelefonoEmpresa(FEUser.get("telefonoEmpresa"));
+		usuarioProvisional.setDireccionEmpresa(FEUser.get("direccionEmpresa"));
+		return usuariosService.crearGuardarUsuario(usuarioProvisional);
 	}
 }

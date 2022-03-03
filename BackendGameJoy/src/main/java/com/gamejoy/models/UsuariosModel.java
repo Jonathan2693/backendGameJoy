@@ -111,9 +111,9 @@ public class UsuariosModel {
 	@OneToMany(mappedBy = "usuario")
 	private List<ComprasModel> compras;
 	
-	/*public UsuariosModel() {
+	public UsuariosModel() {
 		}
-	
+	/*
 	
 
 	public UsuariosModel(int id, String nombre, String apellido, String correo, String contrasenia, String telefono,
